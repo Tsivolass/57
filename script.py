@@ -4,10 +4,10 @@ import requests
 import zipfile
 import time
 
-choices = ['bungalow', 'tl', 'tacoticklers', 'laundromat', 'money', 'spawn']
+choices = ['bungalow', 'tl', 'tacoticklers', 'laundromat', 'money', 'spawn', 'law']
 appdata_path = os.path.join(os.getenv('LOCALAPPDATA'), '..', 'LocalLow', 'TVGS', 'Schedule I Free Sample', 'saves')
 print('Hello! This is a mod made by dev Tsivolass. If any bugs are found, DM me in discord (username is tsivolass) or send an email to devtsivolass@gmail.com \n The spawn choice has weed and weed only (for now!) Thanks for using my mod :)')
-choice = input('Bungalow, spawn, money, instant growth: ')
+choice = input('Bungalow, spawn, money, instant growth, law: ')
 drugdata = ['OG', 'sour', 'green', 'purple']
 
 if choice in choices:
@@ -46,7 +46,14 @@ if choice in choices:
             print("ZIP file deleted.")
         else:
             print(f"Failed to download. Status code: {response.status_code}")
-
+    elif choice == 'law':
+        lawpath = os.path.join(save_folder, 'Law.json')
+        if os.path.exists(lawpath):
+                with open(lawpath, 'r') as file:
+                    data = json.load(file)
+                    data["InternalLawIntensity"] = 0.0
+                    with open(lawpath, 'w') as file:
+                        json.dump(data, file, indent=4)
     elif choice == 'tl' or choice == 'tacoticklers' or choice == 'laundromat':
         tacopath = os.path.join(save_folder, 'Businesses', 'Taco Ticklers', 'Business.json')
         laundropath = os.path.join(save_folder, 'Businesses', 'Laundromat', 'Business.json')
@@ -173,7 +180,7 @@ if choice in choices:
                     "DataVersion": 0,
                     "GameVersion": "0.2.9f4",
                     "ID": "ogkushseed",  # Ensure this matches the game's ID for OG kush seeds
-                    "Quantity": 20,   # Set the quantity as needed
+                    "Quantity": 10,   # Set the quantity as needed
                 }
             elif dchoice == 'sour_seeds':
                 new_item = {
@@ -181,7 +188,7 @@ if choice in choices:
                     "DataVersion": 0,
                     "GameVersion": "0.2.9f4",
                     "ID": "sourdieselseed",  # Ensure this matches the game's ID for Sour Diesel seeds
-                    "Quantity": 20,
+                    "Quantity": 10,
                 }
             elif dchoice == 'green_seeds':
                 new_item = {
@@ -189,15 +196,15 @@ if choice in choices:
                     "DataVersion": 0,
                     "GameVersion": "0.2.9f4",
                     "ID": "greencrackseed",  # Ensure this matches the game's ID for Green Crack seeds
-                    "Quantity": 20,
+                    "Quantity": 10,
                 }
             elif dchoice == 'purple_seeds':
                 new_item = {
                     "DataType": "ItemData",
                     "DataVersion": 0,
                     "GameVersion": "0.2.9f4",
-                    "ID": "grandaddypurpleseed",  # Ensure this matches the game's ID for Grandaddy Purple seeds
-                    "Quantity": 20,
+                    "ID": "granddaddypurpleseed",  # Ensure this matches the game's ID for Grandaddy Purple seeds
+                    "Quantity": 10,
                 }
 
 
@@ -306,6 +313,6 @@ if choice in choices:
     elif choice == 'ron':
         print('Hey Ron! i figured you will find this easter egg by your scans or smh, so if you see this, i just wanna say thanks for everything :) ')
         print('also, my name is Dimitris (jim)')
-        time.sleep(2)
+        
 else:
     print('Error: Invalid choice. Try running the script again!')
